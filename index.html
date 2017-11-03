@@ -2,95 +2,129 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Title</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>On This Date: Weather and News</title>
 
-    <!-- Reset CSS -->
-    <link href="assets/css/reset.css" type="text/css" rel="stylesheet">
+  <!-- Bootstrap and jquery links -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
-    <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-        crossorigin="anonymous">
+  <!-- Links to the CSS files -->
+  <!--<link rel="stylesheet" type="text/css" href="assets/css/reset.css">-->
+  <!--<link rel="stylesheet" type="text/css" href="assets/css/style.css">-->
 
-    <!-- Style CSS -->
-    <link href="assets/css/style.css" type="text/css" rel="stylesheet">
+  <!-- FIREBASE REFERENCE WILL GO HERE -->
+
+
 
 </head>
 
 <body>
+  <!-- News and Weather -->
+  <div class="container">
 
-    <nav class="navbar navbar-default fixed-top">
-        <div class="container">
-            <div class="navbar-header">
-                <a class="navbar-brand">Navbar header...</a>
-            </div>
-        </div>
-    </nav>
-
-    <div class="container">
-
-        <div class="row">
-            <div class="col-xs-12 col-md-12">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-
-                        <div class="page-header">
-                            <h1>Page header...</h1>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        
-        <div class="row">
-            <div class="col-xs-6 col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        
-                        <h2>Panel content...</h2>
-                        
-                    </div>
-                </div>
-            </div>
-            
-            <div class="col-xs-6 col-md-6">
-                <div class="panel panel-default">
-                    <div class="panel-body">
-                        
-                        <h2>Panel content...</h2>
-                        
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- //////////////////////////////// -->
-        
-        <!-- Add more content here... -->
-
-        <!-- /////////////////////////////// -->
-
+    <!-- Jumbotron heading info -->
+    <div class="jumbotron" style="background-color: rgb(172, 241, 238); color: rgb(128, 121, 121)">
+      <h1 class="text-center">On This Date: Weather and News</h1>
+      <h4 class="text-center">Enter a location and a past date to display the weather and some news from that locale on that date.</h4>
     </div>
+    <div class="row">
+      <div class="col-lg-12">
+
+        <!-- Data entry area for location and date  -->
+        <div class="panel panel-primary">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <strong>Please enter a date, a city/town in the U.S., and the state the city/town is in.</strong>
+            </h3>
+          </div>
+          <div class="panel-body">
+
+            <!-- Entry Form -->
+            <form>
+              <div class="form-group">
+                <label for="city-input">U.S. Town/City Location to Search On (required)</label>
+                <input class="form-control" id="city-input" type="text">
+              </div>
+              <div class="form-group">
+                <label for="state-input">U.S. State to Search On (required)</label>
+                <input class="form-control" id="state-input" type="text">
+              </div>
+              <div class="form-group">
+                <label for="date-input">Past Date to Search On (MM/DD/YYYY)</label>
+                <input class="form-control" id="date-input" type="date">
+              </div>
+              <button class="btn btn-primary" id="search-btn" type="submit">Search Date and Location</button>
+            </form>
+          </div>
+
+          <!-- Table of Recent Searches-->
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <strong>Recent Weather and News Searches</strong>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <table class="table table-hover" id='results-table'>
+                <thead>
+                  <tr>
+                    <th>City/Town</th>
+                    <th>State</th>
+                    <th>Date</th>
+                    <th>Weather?</th>
+                    <!--Do we plan to display past search results or just what was searched?-->
+                    <th>News Headline?</th>
+                    <!--Do we plan to display past search results or just what was searched?-->
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Search Results for Weather and News-->
+          <div class="panel panel-primary">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <strong>Weather and News Search Results</strong>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <table class="table table-hover" id='results-table'>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Max. Temp.</th>
+                    <th>Min. Temp.</th>
+                    <th>Humidity</th>
+                    <th>Main Weather</th>
+                    <th>Article Headline and Source</th>
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!--Link to the Javascript file -->
+  <!--<script type="text/javascript" src="assets/javascript/logic.js"></script>-->
+  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 
     <footer class="footer">
         <div class="container">
             <span class="text-muted">&copy; Copyright 2017 JKLP</span>
         </div>
     </footer>
-
-    <!-- JQuery script -->
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-
-    <!-- Bootstrap script -->
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-
-    <!-- Site logic script -->
-    <script type="text/javascript" src="assets/javascript/logic.js"></script>
 
 </body>
 
