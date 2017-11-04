@@ -31,79 +31,120 @@
       <h1 class="text-center">On This Date: Weather and News</h1>
       <h4 class="text-center">Enter a location and a past date to display the weather and some news from that locale on that date.</h4>
     </div>
-    <div class="row">
-      <div class="col-lg-12">
 
-        <!-- Data entry area for location and date  -->
-        <div class="panel panel-primary">
-          <div class="panel-heading">
-            <h3 class="panel-title">
-              <strong>Please enter a date, a city/town in the U.S., and the state the city/town is in.</strong>
-            </h3>
+    <!-- Data entry area for location and date  -->
+    <div class="container-2">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <strong>Please enter a date, a city/town in the U.S., and the state the city/town is in.</strong>
+              </h3>
+            </div>
           </div>
-          <div class="panel-body">
+        </div>
 
-            <!-- Entry Form -->
-            <form>
+        <!-- Entry Form -->
+        <!--<div class="col-md-12">-->
+        <div class="panel-body">
+          <form>
+
+            <div class="col-md-12">
               <div class="form-group">
                 <label for="city-input">U.S. Town/City Location to Search On (required)</label>
                 <input class="form-control" id="city-input" type="text">
               </div>
+            </div>
+            <div class="col-md-12">
+
               <div class="form-group">
-                <label for="state-input">U.S. State to Search On (required)</label>
-                <input class="form-control" id="state-input" type="text">
+
+                <label for="state-input">U.S. State to Search On</label>
+                <!--<div class="col-lg-10">-->
+                <select class="form-control" id="state-input">
+                  <option>Alabama</option>
+                  <option>Alaska</option>
+                  <option>Arizona</option>
+                  <option>Arkansas</option>
+                  <option>California</option>
+                  <option>Colorado</option>
+                  <option>Connecticut</option>
+                  <option>Delaware</option>
+                  <option>District of Columbia</option>
+                  <option>Florida</option>
+                  <option>Georgia</option>
+                  <option>Hawaii</option>
+                  <option>Idaho</option>
+                  <option>Illinois</option>
+                  <option>Indiana</option>
+                  <option>Iowa</option>
+                  <option>Kansas</option>
+                  <option>Kentucky</option>
+                  <option>Louisiana</option>
+                  <option>Maine</option>
+                  <option>Maryland</option>
+                  <option>Massachusetts</option>
+                  <option>Michigan</option>
+                  <option>Minnesota</option>
+                  <option>Mississippi</option>
+                  <option>Missouri</option>
+                  <option>Montana</option>
+                  <option>Nebraska</option>
+                  <option>Nevada</option>
+                  <option>New Hampshire</option>
+                  <option>New Jersey</option>
+                  <option>New Mexico</option>
+                  <option>New York</option>
+                  <option>North Carolina</option>
+                  <option>North Dakota</option>
+                  <option>Ohio</option>
+                  <option>Oklahoma</option>
+                  <option>Oregon</option>
+                  <option>Pennsylvania</option>
+                  <option>Rhode Island</option>
+                  <option>South Carolina</option>
+                  <option>South Dakota</option>
+                  <option>Tennessee</option>
+                  <option>Texas</option>
+                  <option>Utah</option>
+                  <option>Vermont</option>
+                  <option>Virginia</option>
+                  <option>Washington</option>
+                  <option>West Virginia</option>
+                  <option>Wisconsin</option>
+                  <option>Wyoming</option>
+                </select>
+
               </div>
-              <div class="form-group">
+              <div class="form-group" class="col-md-12">
                 <label for="date-input">Past Date to Search On (MM/DD/YYYY)</label>
                 <input class="form-control" id="date-input" type="date">
               </div>
               <button class="btn btn-primary" id="search-btn" type="submit">Search Date and Location</button>
-            </form>
+          </form>
           </div>
+        </div>
+      </div>
+    </div>
 
-          <!-- Table of Recent Searches-->
-          <div class="panel panel-primary">
+    <!-- Table of Recent Searches-->
+    <div class="container-3">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
             <div class="panel-heading">
               <h3 class="panel-title">
-                <strong>Recent Weather and News Searches</strong>
+                <strong>A List of Recent Searches</strong>
               </h3>
             </div>
             <div class="panel-body">
-              <table class="table table-hover" id='results-table'>
+              <table class="table table-hover" id='recent-searches-table'>
                 <thead>
                   <tr>
                     <th>City/Town</th>
                     <th>State</th>
                     <th>Date</th>
-                    <th>Weather?</th>
-                    <!--Do we plan to display past search results or just what was searched?-->
-                    <th>News Headline?</th>
-                    <!--Do we plan to display past search results or just what was searched?-->
-                  </tr>
-                </thead>
-                <tbody>
-                </tbody>
-              </table>
-            </div>
-          </div>
-
-          <!-- Search Results for Weather and News-->
-          <div class="panel panel-primary">
-            <div class="panel-heading">
-              <h3 class="panel-title">
-                <strong>Weather and News Search Results</strong>
-              </h3>
-            </div>
-            <div class="panel-body">
-              <table class="table table-hover" id='results-table'>
-                <thead>
-                  <tr>
-                    <th>Date</th>
-                    <th>Max. Temp.</th>
-                    <th>Min. Temp.</th>
-                    <th>Humidity</th>
-                    <th>Main Weather</th>
-                    <th>Article Headline and Source</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -114,17 +155,76 @@
         </div>
       </div>
     </div>
+
+    <!-- Search Results for Weather -->
+    <div class="container-4">
+      <div class="row">
+        <div class="col-md-12">
+          <div class="panel panel-default">
+            <div class="panel-heading">
+              <h3 class="panel-title">
+                <strong>Weather Results</strong>
+              </h3>
+            </div>
+            <div class="panel-body">
+              <table class="table table-hover" id='weather-results-table'>
+                <thead>
+                  <tr>
+                    <th>Date</th>
+                    <th>Avg. Temp. °F/°C</th>
+                    <th>Avg. Wind Speed (mph)</th>
+                    <th>Max. Humidity</th>
+                    <th>Precipitation</th>
+                    <th>Weather Conditions</th>
+                    <th>        </th>   <!-- This is the column where the icons will appear for the weather conditions -->
+                  </tr>
+                </thead>
+                <tbody>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Search Results for Weather and News-->
+    <!--<div class="container-5">-->
+    <div class="col-md-12">
+      <div class="row">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">
+              <strong>News Search Results</strong>
+            </h3>
+          </div>
+          <div class="panel-body">
+            <table class="table table-hover" id='news-results-table'>
+              <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Article Headline and Source</th>
+                </tr>
+              </thead>
+              <tbody>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
   </div>
 
-  <!--Link to the Javascript file -->
-  <!--<script type="text/javascript" src="assets/javascript/logic.js"></script>-->
-  <!--<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>-->
 
-    <footer class="footer">
-        <div class="container">
-            <span class="text-muted">&copy; Copyright 2017 JKLP</span>
-        </div>
-    </footer>
+  <!--Link to the Javascript files -->
+
+  <!--This is just a placeholder for the file that uses the weather API-->
+  <!--<script type="text/javascript" src="assets/javascript/weatherAPI.js"></script>-->
+
+  <!--This is just a placeholder for the file that uses the news API-->
+  <!--<script type="text/javascript" src="assets/javascript/newsAPI.js"></script>-->
 
 </body>
 
