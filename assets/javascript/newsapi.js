@@ -1,4 +1,4 @@
-$('body').on('click', '#search', function (event) {
+$('body').on('click', '#search-btn', function (event) {
 
     event.preventDefault();
 
@@ -9,10 +9,12 @@ $('body').on('click', '#search', function (event) {
     function nytSearch() {
 
         var query
-        var searchQ = $("#location").val().trim();
+        var searchQ = $("#state-input" + " " + "#city-input").val();
         var limitAmt = $("#noToRetrieve").val();
-        var startY = $("#startYear").val();
-        var endY = $("#endYear").val();
+        var startY = $("#date-input").val();
+        var endY = startY;
+
+        // var endY = $("#endYear").val();
 
 
         if (searchQ == "") {
@@ -46,6 +48,15 @@ $('body').on('click', '#search', function (event) {
                 var element = articleObjects[i];
                 console.log(element.web_url);
                 console.log(element.snippet);
+
+                var varDiv = $('<tr>');
+                var td1 = $('<td>' + startY + '</td>');
+                var td2 = $('<td>' + element.web_url + " " + element.snippet + '</td>');
+                
+                varDiv.append(td1);
+                varDiv.append(td2);
+                
+                $("#news-results-table").append(varDiv);
 
 
             }
