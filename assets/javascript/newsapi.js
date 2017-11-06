@@ -44,18 +44,26 @@ $('body').on('click', '#search-btn', function (event) {
             console.log(result);
             console.log(url);
             var articleObjects = result.response.docs;
-            for (var i = 0; i < 1; i++) {
+            for (var i = 0; i < 4; i++) {
                 var element = articleObjects[i];
                 console.log(element.web_url);
-                console.log(element.snippet);
+                console.log(element.abstract);
+                console.log(startY);
+                var articleText="";
+                if (!(element.abstract)) { 
+                    articleText = element.snippet}
+
+                    else {articleText = element.abstract;};
 
                 var varDiv = $('<tr>');
                 var td1 = $('<td>' + startY + '</td>');
-                var td2 = $('<td>' + element.web_url + " " + element.snippet + '</td>');
-                
+                var td2 = $('<td>' + '<a href="' + element.web_url  + '" >' + element.web_url + '</a><br>' + articleText + '</td>');
+
+                // var td2 = $('<td>' + element.web_url + '<br>' + articleText + '</td>');
+
                 varDiv.append(td1);
                 varDiv.append(td2);
-                
+
                 $("#news-results-table").append(varDiv);
 
 
