@@ -1,46 +1,79 @@
-var date = "history_" + "20171103";
+// Function to query weather API and append data to html
+function displayWeatherInfo() {
 
-var state = "NH";
+    // Emptying the weatherResults table row
+    // $("#weatherResults").empty();
 
-var city = "Portsmouth";
+    // Set date input to dateInput variable
+    var dateInput = $("#date-input").val().trim();
 
-var stateCity = state + "/" + city;
+    // Format dateInput as YYYYMMDD
+    var dateFormatted = "history_" + moment(dateInput).format("YYYYMMDD");
 
-var queryURL = "http://api.wunderground.com/api/759fcbc4347d1d57/" + date + "/q/" + stateCity + ".json";
+    // Set state input to state variable
+    var state = $("#state-input").val().trim();
 
-$.ajax({
-    url: queryURL,
-    method: "GET"
-}).done(function (response) {
+    // Set city input to city variable
+    var city = $("#city-input").val().trim();
 
-console.log(queryURL);
+    // Concatenate state and city variables
+    var stateCity = state + "/" + city;
 
-//Weather conditions
-let weatherCondition = response.history.observations[11].conds;
+    // Query URL used for weather API
+    var queryURL = "http://api.wunderground.com/api/759fcbc4347d1d57/" + dateFormatted + "/q/" + stateCity + ".json";
 
-// Weather icon indicator
-let weatherIcon = response.history.observations[11].icon;
+    //AJAX call to query the weather API
+    $.ajax({
+        url: queryURL,
+        method: "GET"
+    }).done(function (response) {
 
-// Average Temp in Celcius
-let averageTempCelcius = response.history.dailysummary[0].meantempm;
+        console.log(queryURL);
 
-// Average Temp in Fahrneheit
-let averageTempFahrenheit = response.history.dailysummary[0].meantempi;
+        //Weather conditions
+        let weatherCondition = response.history.observations[11].conds;
 
-// Max humidity (%)
-let maxHumidity = response.history.dailysummary[0].maxhumidity;
+        // Weather icon indicator
+        let weatherIcon = response.history.observations[11].icon;
 
-// Average wind speed (mph)
-let averageWindSpeed = response.history.dailysummary[0].meanwindspdi;
+        // Average Temp in Celcius
+        let averageTempCelcius = response.history.dailysummary[0].meantempm;
 
-// Totaaal precipitation (inches)
-let totalPrecipitation = response.history.dailysummary[0].precipi;
+        // Average Temp in Fahrneheit
+        let averageTempFahrenheit = response.history.dailysummary[0].meantempi;
 
-console.log(weatherCondition);
-console.log(weatherIcon);
-console.log(averageTempFahrenheit + "/" + averageTempCelcius);
-console.log("Max Humidity: " + maxHumidity + "%");
-console.log("Total Precipitation: " + totalPrecipitation);
-console.log("Average Wind Speed: " + averageWindSpeed + " mph");
+        // Concatenate F and C temp
+        let averageTempCombined = averageTempFahrenheit + " / " + averageTempCelcius;
 
-});
+        // Max humidity (%)
+        let maxHumidity = response.history.dailysummary[0].maxhumidity;
+
+        // Average wind speed (mph)
+        let averageWindSpeed = response.history.dailysummary[0].meanwindspdi;
+
+        // Total precipitation (inches)
+        let totalPrecipitation = response.history.dailysummary[0].precipi;
+
+        console.log(weatherCondition);
+        console.log(weatherIcon);
+        console.log(averageTempCombined);
+        console.log("Max Humidity: " + maxHumidity + "%");
+        console.log("Total Precipitation: " + totalPrecipitation);
+        console.log("Average Wind Speed: " + averageWindSpeed + " mph");
+
+        // Append items to html
+        $("#weatherResults").append(
+            "<tr><td id='date'> " + moment(dateInput).format("MM/DD/YYYY") +
+            " </td><td id='avgTemp'> " + averageTempCombined +
+            " </td><td id='avgWindSpeed'> " + averageWindSpeed + " mph" +
+            " </td><td id='maxHumidity'> " + maxHumidity + "%" +
+            " </td><td id='totalPrecipitation'> " + totalPrecipitation + "&Prime;" +
+            " </td><td id='weatherConditions'> " + weatherCondition +
+            " </td><td id='weatherIcon'> " + weatherIcon + "</td></tr>");
+
+    });
+
+};
+
+// Click event listener to call displayWeatherInfo function when the 'search-btn' is clicked
+$(document).on("click", "#search-btn", displayWeatherInfo);
