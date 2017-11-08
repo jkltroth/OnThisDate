@@ -5,7 +5,6 @@ html {
 
 body {
     margin-bottom: 60px;
-
     /* Change background image as needed */
     background-image: url("https://pre00.deviantart.net/08e1/th/pre/i/2017/309/b/3/cloud_background___group_project_by_iamhollingsworth-dbsver6.jpg");
 }
@@ -24,9 +23,25 @@ body {
     background: #337ab7;
     color: #ffffff;
 }
+
 .container {
     background: #ffffff;
     border-style: solid;
     border-color: #337ab7;
     border-top: none;
+}
+
+table {
+    color: black;
+    background-color: #337ab7
+}
+
+a {
+    color: black;
+}
+
+;
+:hover {
+    color: black;
+    background-color: #337ab7
 }
