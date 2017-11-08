@@ -110,11 +110,11 @@ $('body').on('click', '#search-btn', function (event) {
                 varDiv.append(td2);
 
                 $("#news-results-table").append(varDiv);
-                $("#news-results-table").hover(function () {
-                    $(this).css("background-color", "darkblue");
-                }, function () {
-                    $(this).css("background-color", "lightblue");
-                });
+                // $("#news-results-table").hover(function () {
+                //     $(this).css("background-color", "darkblue");
+                // }, function () {
+                //     $(this).css("background-color", "lightblue");
+                // });
 
             }
 
