@@ -17,6 +17,8 @@ $('#search-btn').on('click', function (event) {
     // Prevent page refresh
     event.preventDefault();
 
+    $("#recentSearches tr:nth-child(5)").remove();
+    
     // Set date input to dateInput variable
     let dateInput = $("#date-input").val().trim();
     // Format dateInput as YYYYMMDD
@@ -31,17 +33,18 @@ $('#search-btn').on('click', function (event) {
         date: dateFormatted,
         state: state,
         city: city,
+        dateAdded: firebase.database.ServerValue.TIMESTAMP
     });
 
 });
 
 // Firebase watcher + initial loader
-database.ref().on("child_added", function (childSnapshot) {
+database.ref().orderByChild("dateAdded").limitToLast(5).on("child_added", function (childSnapshot) {
 
     // Log everything that's coming out of snapshot
-    console.log("Train Name: " + childSnapshot.val().date);
-    console.log("Destination: " + childSnapshot.val().state);
-    console.log("First Train Time: " + childSnapshot.val().city);
+    console.log("Date: " + childSnapshot.val().date);
+    console.log("State: " + childSnapshot.val().state);
+    console.log("City: " + childSnapshot.val().city);
 
     let date = childSnapshot.val().date;
 
@@ -54,6 +57,7 @@ database.ref().on("child_added", function (childSnapshot) {
         "<tr><td class='city'> " + city +
         " </td><td class='state'> " + state +
         " </td><td class='date'> " + moment(date).format("MM/DD/YYYY") + "</td></tr>");
+
 
     // Handle the errors
 }, function (errorObject) {

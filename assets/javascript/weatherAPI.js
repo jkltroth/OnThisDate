@@ -2,7 +2,7 @@
 function displayWeatherInfo() {
 
     // Emptying the weatherResults table row
-    // $("#weatherResults").empty();
+    $("#weatherResults").empty();
 
     // Set date input to dateInput variable
     var dateInput = $("#date-input").val().trim();
@@ -33,9 +33,6 @@ function displayWeatherInfo() {
         //Weather conditions
         let weatherCondition = response.history.observations[11].conds;
 
-        // Weather icon indicator
-        let weatherIcon = response.history.observations[11].icon;
-
         // Average Temp in Celcius
         let averageTempCelcius = response.history.dailysummary[0].meantempm;
 
@@ -55,7 +52,6 @@ function displayWeatherInfo() {
         let totalPrecipitation = response.history.dailysummary[0].precipi;
 
         console.log(weatherCondition);
-        console.log(weatherIcon);
         console.log(averageTempCombined);
         console.log("Max Humidity: " + maxHumidity + "%");
         console.log("Total Precipitation: " + totalPrecipitation);
@@ -68,8 +64,7 @@ function displayWeatherInfo() {
             " </td><td id='avgWindSpeed'> " + averageWindSpeed + " mph" +
             " </td><td id='maxHumidity'> " + maxHumidity + "%" +
             " </td><td id='totalPrecipitation'> " + totalPrecipitation + "&Prime;" +
-            " </td><td id='weatherConditions'> " + weatherCondition +
-            " </td><td id='weatherIcon'> " + weatherIcon + "</td></tr>");
+            " </td><td id='weatherConditions'> " + weatherCondition + "</td></tr>");
 
     });
 
