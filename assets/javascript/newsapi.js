@@ -28,11 +28,11 @@ $('body').on('click', '#search-btn', function (event) {
         url += "&q=" + searchQ;
 
         if (endY !== "") {
-            // url += "&end_date=" + dateFormatted;
+            url += "&end_date=" + dateFormatted;
         }
 
         if (startY !== "") {
-            url += "&begin_date=" + dateFormatted;
+            url += "&start_date=" + dateFormatted;
         }
 
         if (limitAmt !== "") {
