@@ -12,7 +12,8 @@ $('body').on('click', '#search-btn', function (event) {
         var searchQ = $("#state-input" + " " + "#city-input").val();
         var limitAmt = $("#noToRetrieve").val();
         var startY = $("#date-input").val();
-        var endY = startY;
+        var dateFormatted = moment(dateInput).format("YYYYMMDD");
+        var endY = dateFormatted;
 
         // var endY = $("#endYear").val();
 
@@ -29,7 +30,7 @@ $('body').on('click', '#search-btn', function (event) {
         }
 
         if (startY !== "") {
-            url += "&start_date=" + startY;
+            url += "&begin_date=" + startY;
         }
 
         if (limitAmt !== "") {
@@ -48,7 +49,8 @@ $('body').on('click', '#search-btn', function (event) {
                 var element = articleObjects[i];
                 console.log(element.web_url);
                 console.log(element.abstract);
-                console.log(startY);
+                var dateFormatted = moment(dateInput).format("MMDDYYYY");
+                console.log(dateFormatted);
                 var articleText="";
                 if (!(element.abstract)) { 
                     articleText = element.snippet}
