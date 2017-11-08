@@ -9,7 +9,9 @@ $('body').on('click', '#search-btn', function (event) {
     function nytSearch() {
 
         var query
-        var searchQ = $("#state-input" + " " + "#city-input").val();
+        var searchState = $("#state-input").val();
+        var searchCity = $("#city-input").val();
+        var searchQ = searchState + " " + searchCity;
         var limitAmt = $("#noToRetrieve").val();
         var startY = $("#date-input").val();
         var dateFormatted = moment(startY).format("YYYYMMDD");
@@ -37,6 +39,7 @@ $('body').on('click', '#search-btn', function (event) {
             limitAmt = 1;
             url += "&limit=" + limitAmt;
         }
+console.log("searchQ is " + searchQ);
 
         $.ajax({
             url: url,
