@@ -9,10 +9,12 @@ $('body').on('click', '#search-btn', function (event) {
     function nytSearch() {
 
         var query
-        var searchQ = $("#state-input" + " " + "#city-input").val();
+        var searchState = $("#state-input").val();
+        var searchCity = $("#city-input").val();
+        var searchQ = searchState + " " + searchCity;
         var limitAmt = $("#noToRetrieve").val();
         var startY = $("#date-input").val();
-        var dateFormatted = moment(dateInput).format("YYYYMMDD");
+        var dateFormatted = moment(startY).format("YYYYMMDD");
         var endY = dateFormatted;
 
         // var endY = $("#endYear").val();
@@ -26,17 +28,18 @@ $('body').on('click', '#search-btn', function (event) {
         url += "&q=" + searchQ;
 
         if (endY !== "") {
-            url += "&end_date=" + endY;
+            // url += "&end_date=" + dateFormatted;
         }
 
         if (startY !== "") {
-            url += "&begin_date=" + startY;
+            url += "&begin_date=" + dateFormatted;
         }
 
         if (limitAmt !== "") {
             limitAmt = 1;
             url += "&limit=" + limitAmt;
         }
+console.log("searchQ is " + searchQ);
 
         $.ajax({
             url: url,
@@ -49,8 +52,8 @@ $('body').on('click', '#search-btn', function (event) {
                 var element = articleObjects[i];
                 console.log(element.web_url);
                 console.log(element.abstract);
-                var dateFormatted = moment(dateInput).format("MMDDYYYY");
-                console.log(dateFormatted);
+                var dateFormatted = moment(startY).format("MM/DD/YYYY");
+                console.log("formatted date is " + dateFormatted);
                 var articleText="";
                 if (!(element.abstract)) { 
                     articleText = element.snippet}
@@ -58,7 +61,7 @@ $('body').on('click', '#search-btn', function (event) {
                     else {articleText = element.abstract;};
 
                 var varDiv = $('<tr>');
-                var td1 = $('<td>' + startY + '</td>');
+                var td1 = $('<td>' + dateFormatted + '</td>');
                 var td2 = $('<td>' + '<a href="' + element.web_url  + '" >' + element.web_url + '</a><br>' + articleText + '</td>');
 
                 // var td2 = $('<td>' + element.web_url + '<br>' + articleText + '</td>');
