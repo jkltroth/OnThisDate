@@ -14,8 +14,9 @@ $('body').on('click', '#search-btn', function (event) {
         // var searchQ = searchState + "%20" + searchCity;
         var limitAmt = $("#noToRetrieve").val();
         var startY = $("#date-input").val();
-        var dateFormatted = moment(startY).format("YYYYMMDD");
-        var endY = dateFormatted;
+
+        // var dateFormatted = moment(startY).format("YYYYMMDD");
+        var endY = startY;
 
         // var endY = $("#endYear").val();
 
@@ -31,39 +32,26 @@ $('body').on('click', '#search-btn', function (event) {
 
 
         // create before and after dates 
-        // var date = new Date(dateFormatted);
-        console.log(startY);
-        var dateresult = startY.split('-');
-        var dd = dateresult[2];
-        var mm = dateresult[1];
-        var yyyy = dateresult[0];
-        console.log(yyyy + " " + mm + " " + dd);
-        dd--;
-        console.log(dd + " " + mm);
-        var datebefore = yyyy + "/" + mm + "/" + dd;
-        var dateafter =  yyyy + "/" + mm + "/" + dd;
-        if (dd < 10) {
-            datebefore = '0' + yyyy + "/" + mm + "/" + dd;
+        var dateSplit = startY.split('-');
+        var today = new Date();
+        today.setYear(dateSplit[0]);
+        today.setMonth(dateSplit[1] -1);
+        today.setDate(dateSplit[2]);
+        console.log(today);
+        
+        var yesterday = new Date(today.getTime());
+        yesterday.setDate(yesterday.getDate()-1);
+        console.log(yesterday);
 
-        } else if (dd >= 10) {
-            datebefore = yyyy + "/" + mm + "/" + dd;
-        }
+        var tomorrow = new Date(today.getTime());
+        tomorrow.setDate(tomorrow.getDate()+1);
+        console.log(tomorrow);
+        
+        var dateB = moment(yesterday).format("YYYYMMDD");
+        var dateA = moment(tomorrow).format("YYYYMMDD");
+        console.log(dateB);
+        console.log(dateA);
 
-        console.log(datebefore);
-
-        dd = dd + 2;
-
-        if (dd < 10) {
-            dateafter = '0' + yyyy + "/" + mm + "/" + dd;
-
-        } else if (dd >= 10) {
-            dateafter = yyyy + "/" + mm + "/" + dd;
-        }
-
-        console.log(dateafter);
-        var dateB = moment(datebefore).format("YYYYMMDD");
-        var dateA = moment(dateafter).format("YYYYMMDD");
-     
         if (endY !== "") {
             url += "&begin_date=" + dateB;
         }
@@ -105,7 +93,9 @@ $('body').on('click', '#search-btn', function (event) {
                 var td2 = $('<td>' + '<a href="' + element.web_url + '" >' + element.web_url + '</a><br>' + articleText + '</td>');
 
                 // var td2 = $('<td>' + element.web_url + '<br>' + articleText + '</td>');
-
+               varDiv.text("");
+               $("#news-results-table").append(varDiv);
+               
                 varDiv.append(td1);
                 varDiv.append(td2);
 
@@ -119,6 +109,10 @@ $('body').on('click', '#search-btn', function (event) {
             }
 
 
+            if (!(pubDate)) {
+
+                $("#news-results-table").text("No articles meet your criteria");
+            }
 
 
 
@@ -126,7 +120,7 @@ $('body').on('click', '#search-btn', function (event) {
             throw err;
         });
     };
-
+    // $("#news-results-table").empty();
     nytSearch();
 
 
