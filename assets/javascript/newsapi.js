@@ -1,18 +1,23 @@
+function formIsValid(){
+    var form = document.getElementById('needs-validation');
+    var errDiv = $("#errorDiv");
+    if(form.checkValidity() === false){
+        $('.errorDiv').html('Please populate all fields');
+        
+
+           console.log('failed validation');
+           event.preventDefault();
+           event.stopPropagation();
+           return false;
+    } else {
+        return true;
+    }
+}
 $(document).ready(function () {
     // form submit handler
     $('body').on('click', '#search-btn', function (event) {
 
-        var form = document.getElementById('needs-validation');
-        var errDiv = $("#errorDiv");
-
-        if (form.checkValidity() === false) {
-            $('.errorDiv').html('Please populate all fields');
-         
-
-            console.log('failed validation');
-            event.preventDefault();
-            event.stopPropagation();
-        } else {
+        if (formIsValid()) {
 
             event.preventDefault();
             $("#errorDiv").html("");
