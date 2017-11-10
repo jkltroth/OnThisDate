@@ -30,39 +30,66 @@ function displayWeatherInfo() {
 
         console.log(queryURL);
 
-        //Weather conditions
-        let weatherCondition = response.history.observations[11].conds;
+        var results = response.history
 
+        if (!(results.observations[0])) {
+
+            var weatherCondition = "No Results";
+
+        } else {
+
+            //Weather conditions
+            var weatherCondition = results.observations[11].conds;
+
+        };
+
+        if(results.dailysummary[0].maxhumidity === "") {
+
+            var maxHumidity = "No Results";
+
+        } else {
+
+            // Max humidity (%)
+            var maxHumidity = results.dailysummary[0].maxhumidity + "%";
+
+        };
+        
+        
+        if (results.dailysummary[0].meanwindspdi === "") {
+            
+            var averageWindSpeed = "No Results";
+            
+        } else {
+            
+            // Average wind speed (mph)
+            var averageWindSpeed = results.dailysummary[0].meanwindspdi + " mph";
+            
+        };
+        
         // Average Temp in Celcius
-        let averageTempCelcius = response.history.dailysummary[0].meantempm;
+        var averageTempCelcius = results.dailysummary[0].meantempm;
 
         // Average Temp in Fahrneheit
-        let averageTempFahrenheit = response.history.dailysummary[0].meantempi;
+        var averageTempFahrenheit = results.dailysummary[0].meantempi;
 
         // Concatenate F and C temp
-        let averageTempCombined = averageTempFahrenheit + " / " + averageTempCelcius;
-
-        // Max humidity (%)
-        let maxHumidity = response.history.dailysummary[0].maxhumidity;
-
-        // Average wind speed (mph)
-        let averageWindSpeed = response.history.dailysummary[0].meanwindspdi;
-
+        var averageTempCombined = averageTempFahrenheit + " / " + averageTempCelcius;
+        
         // Total precipitation (inches)
-        let totalPrecipitation = response.history.dailysummary[0].precipi;
+        var totalPrecipitation = results.dailysummary[0].precipi;
 
         console.log(weatherCondition);
         console.log(averageTempCombined);
-        console.log("Max Humidity: " + maxHumidity + "%");
+        console.log("Max Humidity: " + maxHumidity);
         console.log("Total Precipitation: " + totalPrecipitation);
-        console.log("Average Wind Speed: " + averageWindSpeed + " mph");
+        console.log("Average Wind Speed: " + averageWindSpeed);
 
         // Append items to html
         $("#weatherResults").append(
             "<tr><td id='date'> " + moment(dateInput).format("MM/DD/YYYY") +
             " </td><td id='avgTemp'> " + averageTempCombined +
-            " </td><td id='avgWindSpeed'> " + averageWindSpeed + " mph" +
-            " </td><td id='maxHumidity'> " + maxHumidity + "%" +
+            " </td><td id='avgWindSpeed'> " + averageWindSpeed + 
+            " </td><td id='maxHumidity'> " + maxHumidity + 
             " </td><td id='totalPrecipitation'> " + totalPrecipitation + "&Prime;" +
             " </td><td id='weatherConditions'> " + weatherCondition + "</td></tr>");
 

@@ -17,8 +17,6 @@ $('#search-btn').on('click', function (event) {
     // Prevent page refresh
     event.preventDefault();
 
-    $("#recentSearches tr:nth-child(5)").remove();
-    
     // Set date input to dateInput variable
     let dateInput = $("#date-input").val().trim();
     // Format dateInput as YYYYMMDD
@@ -27,7 +25,7 @@ $('#search-btn').on('click', function (event) {
     let state = $("#state-input").val().trim();
     // Set city input to city variable
     let city = $("#city-input").val().trim();
-
+    
     // Push input values (as variables) to the database
     database.ref().push({
         date: dateFormatted,
@@ -35,11 +33,14 @@ $('#search-btn').on('click', function (event) {
         city: city,
         dateAdded: firebase.database.ServerValue.TIMESTAMP
     });
-
+    
 });
 
 // Firebase watcher + initial loader
 database.ref().orderByChild("dateAdded").limitToLast(5).on("child_added", function (childSnapshot) {
+    
+    //Remove the 5th item in the table when something changes in the DB
+    $("#recentSearches tr:nth-child(5)").remove();
 
     // Log everything that's coming out of snapshot
     console.log("Date: " + childSnapshot.val().date);
