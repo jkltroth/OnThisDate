@@ -21,7 +21,6 @@
   <script src="https://www.gstatic.com/firebasejs/4.6.1/firebase.js"></script>
 
 
-
 </head>
 
 <body>
@@ -54,11 +53,11 @@
             <div class="col-md-12">
               <div class="form-group">
                 <label for="city-input">U.S. Town/City Location to Search On (required)</label>
-                <input class="form-control" id="city-input" type="text">
+                <input class="form-control" id="city-input" type="text" required>
               </div>
             </div>
-            <div class="col-md-12">
 
+            <div class="col-md-12">
               <div class="form-group">
 
                 <label for="state-input">U.S. State to Search On</label>
@@ -121,8 +120,13 @@
               <div class="form-group" class="col-md-12">
                 <label for="date-input">Past Date to Search</label>
                 <input class="form-control" id="date-input" type="date">
+
               </div>
               <button class="btn btn-primary" id="search-btn" type="submit">Search Date and Location</button>
+
+              <div id=“errorDiv”>
+              </div>
+
           </form>
           </div>
         </div>
@@ -209,7 +213,7 @@
                   <th>Article Headline and Source</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="news-results">
               </tbody>
             </table>
           </div>
