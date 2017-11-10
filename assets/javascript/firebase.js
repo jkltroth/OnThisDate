@@ -14,31 +14,34 @@ var database = firebase.database();
 
 // On click function for the submit button..
 $('#search-btn').on('click', function (event) {
-    // Prevent page refresh
-    event.preventDefault();
+    if (formIsValid()) {
 
-    // Set date input to dateInput variable
-    let dateInput = $("#date-input").val().trim();
-    // Format dateInput as YYYYMMDD
-    let dateFormatted = moment(dateInput).format("YYYYMMDD");
-    // Set state input to state variable
-    let state = $("#state-input").val().trim();
-    // Set city input to city variable
-    let city = $("#city-input").val().trim();
-    
-    // Push input values (as variables) to the database
-    database.ref().push({
-        date: dateFormatted,
-        state: state,
-        city: city,
-        dateAdded: firebase.database.ServerValue.TIMESTAMP
-    });
-    
+        // Prevent page refresh
+        event.preventDefault();
+
+        // Set date input to dateInput variable
+        let dateInput = $("#date-input").val().trim();
+        // Format dateInput as YYYYMMDD
+        let dateFormatted = moment(dateInput).format("YYYYMMDD");
+        // Set state input to state variable
+        let state = $("#state-input").val().trim();
+        // Set city input to city variable
+        let city = $("#city-input").val().trim();
+
+        // Push input values (as variables) to the database
+        database.ref().push({
+            date: dateFormatted,
+            state: state,
+            city: city,
+            dateAdded: firebase.database.ServerValue.TIMESTAMP
+        });
+    };
 });
+
 
 // Firebase watcher + initial loader
 database.ref().orderByChild("dateAdded").limitToLast(5).on("child_added", function (childSnapshot) {
-    
+
     //Remove the 5th item in the table when something changes in the DB
     $("#recentSearches tr:nth-child(5)").remove();
 
