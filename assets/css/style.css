@@ -21,7 +21,7 @@ body {
 
 .panel {
     background: #337ab7;
-    color: #ffffff;
+    text-align: center;
 }
 
 .container {
@@ -36,8 +36,15 @@ table {
     background-color: #337ab7
 }
 
+th {
+    text-align: center;
+    font-size: 75%;
+}
+
 a {
-    color: black;
+    color: white;
+    font-size: 75%;
+
 }
 
 ;
