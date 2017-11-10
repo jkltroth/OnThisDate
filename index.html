@@ -9,7 +9,10 @@
 
   <!-- Bootstrap and jquery links -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/css/bootstrapValidator.css"
+    crossorigin="anonymous">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.5.3/js/bootstrapValidator.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 
   <!-- Links to the CSS files -->
@@ -50,12 +53,12 @@
         <!-- Entry Form -->
         <!--<div class="col-md-12">-->
         <div class="panel-body">
-          <form>
+          <form role="form" id="needs-validation" data-toggle="validator">
 
             <div class="col-md-12">
               <div class="form-group">
                 <label for="city-input">U.S. Town/City Location to Search On (required)</label>
-                <input class="form-control" id="city-input" type="text">
+                <input class="form-control" id="city-input" type="text" required>
               </div>
             </div>
             <div class="col-md-12">
@@ -64,7 +67,7 @@
 
                 <label for="state-input">U.S. State to Search On</label>
                 <!--<div class="col-lg-10">-->
-                <select class="form-control" id="state-input">
+                <select class="form-control" id="state-input" required>
                   <option>Select a State</option>
                   <option>Alabama</option>
                   <option>Alaska</option>
@@ -122,9 +125,10 @@
               </div>
               <div class="form-group" class="col-md-12">
                 <label for="date-input">Past Date to Search On (MM/DD/YYYY)</label>
-                <input class="form-control" id="date-input" type="date">
+                <input class="form-control" id="date-input" type="date" required>
               </div>
               <button class="btn btn-primary" id="search-btn" type="submit">Search Date and Location</button>
+              <div class="errorDiv" id=“errorDiv”></div>
           </form>
           </div>
         </div>
@@ -211,7 +215,7 @@
                   <th>Article Headline and Source</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="news-results">
               </tbody>
             </table>
           </div>
@@ -236,6 +240,7 @@
 
   <!--This is just a placeholder for the file that uses the news API-->
   <script type="text/javascript" src="./assets/javascript/newsapi.js"></script>
+
 
 </body>
 
