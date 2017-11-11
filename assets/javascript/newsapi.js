@@ -154,6 +154,7 @@ $(document).ready(function () {
                     if (!(pubDate)) {
 
                         $("#news-results").text("No articles meet your criteria");
+                        
                     }
 
 
