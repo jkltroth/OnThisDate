@@ -1,9 +1,9 @@
 // Function to query weather API and append data to html
 function displayWeatherInfo() {
+     // Emptying the weatherResults table row
+     $("#weatherResults").empty();
     if (formIsValid()) {
-
-        // Emptying the weatherResults table row
-        $("#weatherResults").empty();
+       
 
         // Set date input to dateInput variable
         var dateInput = $("#date-input").val().trim();
@@ -95,7 +95,9 @@ function displayWeatherInfo() {
                 " </td><td id='weatherConditions'> " + weatherCondition + "</td></tr>");
 
         });
-    };
+    } else {
+        event.preventDefault();
+    }
 };
 
 
