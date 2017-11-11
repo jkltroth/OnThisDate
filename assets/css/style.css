@@ -21,7 +21,7 @@ body {
 
 .panel {
     background: #337ab7;
-    text-align: center;
+    text-align: left;
 }
 
 .container {
@@ -37,7 +37,7 @@ table {
 }
 
 th {
-    text-align: center;
+    text-align: left;
     font-size: 75%;
 }
 
@@ -51,4 +51,34 @@ a {
 :hover {
     color: black;
     background-color: #337ab7
+}
+
+@media only screen and (max-width: 736px) {
+    body {
+        background-image: none;
+        background-color: #337ab7;
+    }
+    
+    .container {
+        width: 100%;
+        border-color: none;
+        background-color: #337ab7
+    }
+    table {
+        width: 100%;
+    }
+    .container-4{
+        width: 100%;
+        background-color: #337ab7
+    }
+
+    .panel {
+        border-color: none;
+        border: none;
+        width: 800 px;
+    }
+    #search-btn {
+        border-color: #ffffff;
+    }
+
 }
