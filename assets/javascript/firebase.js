@@ -1,12 +1,7 @@
-// Function to capitalize first letters of city/town input
-function upperCaseFirstLetter(string) {
-    return string.charAt(0).toUpperCase() + string.slice(1);
-};
-
-// Function to lowercase all other letters of city/town input
-function lowerCaseAllWordsExceptFirstLetters(string) {
-    return string.replace(/\w\S*/g, function (word) {
-        return word.charAt(0) + word.slice(1).toLowerCase();
+// Function to capitalize first letters of city/town inpu and to lowercase all other letters
+function toTitleCase(str) {
+    return str.replace(/\w\S*/g, function (txt) {
+        return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
     });
 };
 
@@ -65,11 +60,7 @@ database.ref().orderByChild("dateAdded").limitToLast(5).on("child_added", functi
 
     let city = childSnapshot.val().city;
 
-    // city = city.replace(/\b./g, function (m) {
-    //     return (m.charAt(0).toUpperCase() + m.slice(1).toLowerCase());
-    // });
-
-    city = upperCaseFirstLetter(lowerCaseAllWordsExceptFirstLetters(city));
+    city = toTitleCase(city);
 
     let state = childSnapshot.val().state;
 
