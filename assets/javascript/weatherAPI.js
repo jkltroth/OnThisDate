@@ -1,9 +1,9 @@
 // Function to query weather API and append data to html
 function displayWeatherInfo() {
-     // Emptying the weatherResults table row
-     $("#weatherResults").empty();
+    // Emptying the weatherResults table row
+    $("#weatherResults").empty();
     if (formIsValid()) {
-       
+
 
         // Set date input to dateInput variable
         var dateInput = $("#date-input").val().trim();
@@ -21,7 +21,7 @@ function displayWeatherInfo() {
         var stateCity = state + "/" + city;
 
         // Query URL used for weather API
-        var queryURL = "http://api.wunderground.com/api/759fcbc4347d1d57/" + dateFormatted + "/q/" + stateCity + ".json";
+        var queryURL = "https://api.wunderground.com/api/759fcbc4347d1d57/" + dateFormatted + "/q/" + stateCity + ".json";
 
         //AJAX call to query the weather API
         $.ajax({
@@ -67,6 +67,17 @@ function displayWeatherInfo() {
 
             };
 
+            if (results.dailysummary[0].precipi === "T") {
+
+                var totalPrecipitation = "Trace Amounts";
+
+            } else {
+            
+                // Total precipitation (inches)
+                var totalPrecipitation = results.dailysummary[0].precipi + "&Prime;";
+            
+            };
+
             // Average Temp in Celcius
             var averageTempCelcius = results.dailysummary[0].meantempm;
 
@@ -76,8 +87,6 @@ function displayWeatherInfo() {
             // Concatenate F and C temp
             var averageTempCombined = averageTempFahrenheit + " / " + averageTempCelcius;
 
-            // Total precipitation (inches)
-            var totalPrecipitation = results.dailysummary[0].precipi;
 
             console.log(weatherCondition);
             console.log(averageTempCombined);
@@ -91,7 +100,7 @@ function displayWeatherInfo() {
                 " </td><td id='avgTemp'> " + averageTempCombined +
                 " </td><td id='avgWindSpeed'> " + averageWindSpeed +
                 " </td><td id='maxHumidity'> " + maxHumidity +
-                " </td><td id='totalPrecipitation'> " + totalPrecipitation + "&Prime;" +
+                " </td><td id='totalPrecipitation'> " + totalPrecipitation +
                 " </td><td id='weatherConditions'> " + weatherCondition + "</td></tr>");
 
         });

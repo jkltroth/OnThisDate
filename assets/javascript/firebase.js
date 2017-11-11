@@ -52,11 +52,13 @@ database.ref().orderByChild("dateAdded").limitToLast(5).on("child_added", functi
     console.log("State: " + childSnapshot.val().state);
     console.log("City: " + childSnapshot.val().city);
 
-    let date = childSnapshot.val().date;
-
-    let state = childSnapshot.val().state;
-
     let city = childSnapshot.val().city;
+
+    city = city.charAt(0).toUpperCase() + city.substr(1).toLowerCase();
+    
+    let state = childSnapshot.val().state;
+    
+    let date = childSnapshot.val().date;
 
     // append items to html
     $("#recentSearches").prepend(
