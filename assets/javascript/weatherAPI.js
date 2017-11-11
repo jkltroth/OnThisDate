@@ -44,7 +44,7 @@ function displayWeatherInfo() {
 
             };
 
-            if (results.dailysummary[0].maxhumidity === "") {
+            if (!(results.dailysummary[0]) || results.dailysummary[0].maxhumidity === "") {
 
                 var maxHumidity = "No Results";
 
@@ -56,7 +56,7 @@ function displayWeatherInfo() {
             };
 
 
-            if (results.dailysummary[0].meanwindspdi === "") {
+            if (!(results.dailysummary[0]) || results.dailysummary[0].meanwindspdi === "") {
 
                 var averageWindSpeed = "No Results";
 
@@ -67,26 +67,36 @@ function displayWeatherInfo() {
 
             };
 
-            if (results.dailysummary[0].precipi === "T") {
+            if (!(results.dailysummary[0])) {
+
+                var totalPrecipitation = "No Results";
+
+            } else if (results.dailysummary[0].precipi === "T") {
 
                 var totalPrecipitation = "Trace Amounts";
 
             } else {
-            
+
                 // Total precipitation (inches)
                 var totalPrecipitation = results.dailysummary[0].precipi + "&Prime;";
-            
+
             };
 
-            // Average Temp in Celcius
-            var averageTempCelcius = results.dailysummary[0].meantempm;
+            if (!(results.dailysummary[0])) {
 
-            // Average Temp in Fahrneheit
-            var averageTempFahrenheit = results.dailysummary[0].meantempi;
+                var averageTempCombined = "No Results";
 
-            // Concatenate F and C temp
-            var averageTempCombined = averageTempFahrenheit + " / " + averageTempCelcius;
 
+            } else {
+                // Average Temp in Celcius
+                var averageTempCelcius = results.dailysummary[0].meantempm;
+
+                // Average Temp in Fahrneheit
+                var averageTempFahrenheit = results.dailysummary[0].meantempi;
+
+                // Concatenate F and C temp
+                var averageTempCombined = averageTempFahrenheit + " / " + averageTempCelcius;
+            };
 
             console.log(weatherCondition);
             console.log(averageTempCombined);
