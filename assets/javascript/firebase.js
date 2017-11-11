@@ -1,3 +1,15 @@
+// Function to capitalize first letters of city/town input
+function upperCaseFirstLetter(string) {
+    return string.charAt(0).toUpperCase() + string.slice(1);
+};
+
+// Function to lowercase all other letters of city/town input
+function lowerCaseAllWordsExceptFirstLetters(string) {
+    return string.replace(/\w\S*/g, function (word) {
+        return word.charAt(0) + word.slice(1).toLowerCase();
+    });
+};
+
 // Initialize Firebase
 var config = {
     apiKey: "AIzaSyCekWQfFABo4qLyw2juKrVUBsg6vuTso6o",
@@ -40,7 +52,6 @@ $('#search-btn').on('click', function (event) {
     }
 });
 
-
 // Firebase watcher + initial loader
 database.ref().orderByChild("dateAdded").limitToLast(5).on("child_added", function (childSnapshot) {
 
@@ -54,10 +65,14 @@ database.ref().orderByChild("dateAdded").limitToLast(5).on("child_added", functi
 
     let city = childSnapshot.val().city;
 
-    city = city.charAt(0).toUpperCase() + city.substr(1).toLowerCase();
-    
+    // city = city.replace(/\b./g, function (m) {
+    //     return (m.charAt(0).toUpperCase() + m.slice(1).toLowerCase());
+    // });
+
+    city = upperCaseFirstLetter(lowerCaseAllWordsExceptFirstLetters(city));
+
     let state = childSnapshot.val().state;
-    
+
     let date = childSnapshot.val().date;
 
     // append items to html

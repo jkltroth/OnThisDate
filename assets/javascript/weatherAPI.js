@@ -33,68 +33,79 @@ function displayWeatherInfo() {
 
             var results = response.history
 
-            if (!(results.observations[0])) {
+            if (!(results)) {
 
                 var weatherCondition = "No Results";
-
-            } else {
-
-                //Weather conditions
-                var weatherCondition = results.observations[11].conds;
-
-            };
-
-            if (!(results.dailysummary[0]) || results.dailysummary[0].maxhumidity === "") {
-
                 var maxHumidity = "No Results";
-
-            } else {
-
-                // Max humidity (%)
-                var maxHumidity = results.dailysummary[0].maxhumidity + "%";
-
-            };
-
-
-            if (!(results.dailysummary[0]) || results.dailysummary[0].meanwindspdi === "") {
-
                 var averageWindSpeed = "No Results";
-
-            } else {
-
-                // Average wind speed (mph)
-                var averageWindSpeed = results.dailysummary[0].meanwindspdi + " mph";
-
-            };
-
-            if (!(results.dailysummary[0])) {
-
                 var totalPrecipitation = "No Results";
-
-            } else if (results.dailysummary[0].precipi === "T") {
-
-                var totalPrecipitation = "Trace Amounts";
-
-            } else {
-
-                // Total precipitation (inches)
-                var totalPrecipitation = results.dailysummary[0].precipi + "&Prime;";
-
-            };
-
-            if (!(results.dailysummary[0])) {
-
                 var averageTempCombined = "No Results";
-
+                
             } else {
-                // Average Temp in Celcius
-                var averageTempCelcius = results.dailysummary[0].meantempm;
 
-                // Average Temp in Fahrneheit
-                var averageTempFahrenheit = results.dailysummary[0].meantempi;
+                if (!(results.observations[0])) {
 
-                // Concatenate F and C temp
-                var averageTempCombined = averageTempFahrenheit + " / " + averageTempCelcius;
+                    var weatherCondition = "No Results";
+
+                } else {
+
+                    //Weather conditions
+                    var weatherCondition = results.observations[11].conds;
+
+                };
+
+                if (!(results.dailysummary[0]) || results.dailysummary[0].maxhumidity === "") {
+
+                    var maxHumidity = "No Results";
+
+                } else {
+
+                    // Max humidity (%)
+                    var maxHumidity = results.dailysummary[0].maxhumidity + "%";
+
+                };
+
+
+                if (!(results.dailysummary[0]) || results.dailysummary[0].meanwindspdi === "") {
+
+                    var averageWindSpeed = "No Results";
+
+                } else {
+
+                    // Average wind speed (mph)
+                    var averageWindSpeed = results.dailysummary[0].meanwindspdi + " mph";
+
+                };
+
+                if (!(results.dailysummary[0])) {
+
+                    var totalPrecipitation = "No Results";
+
+                } else if (results.dailysummary[0].precipi === "T") {
+
+                    var totalPrecipitation = "Trace Amounts";
+
+                } else {
+
+                    // Total precipitation (inches)
+                    var totalPrecipitation = results.dailysummary[0].precipi + "&Prime;";
+
+                };
+
+                if (!(results.dailysummary[0])) {
+
+                    var averageTempCombined = "No Results";
+
+                } else {
+                    // Average Temp in Celcius
+                    var averageTempCelcius = results.dailysummary[0].meantempm;
+
+                    // Average Temp in Fahrneheit
+                    var averageTempFahrenheit = results.dailysummary[0].meantempi;
+
+                    // Concatenate F and C temp
+                    var averageTempCombined = averageTempFahrenheit + " / " + averageTempCelcius;
+                };
             };
 
             console.log(weatherCondition);
