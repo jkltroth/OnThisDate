@@ -1,26 +1,70 @@
-function formIsValid(){
+var dateA, dateB;
+
+function formIsValid() {
     var form = document.getElementById('needs-validation');
     var errDiv = $("#errorDiv");
-    if(form.checkValidity() === false){
+    if (form.checkValidity() === false) {
         $('.errorDiv').html('Please populate all fields');
-        
-
-           console.log('failed validation');
-           event.preventDefault();
-           event.stopPropagation();
-           return false;
+        console.log('failed validation');
+        event.preventDefault();
+        event.stopPropagation();
+        return false;
     } else {
-        return true;
+        var dateToCheck = $("#date-input").val();
+        return checkDate(dateToCheck);
     }
 }
+
+function checkDate(dateIn) {
+
+    console.log("in checkDate");
+    var dateSplit = dateIn.split('-');
+    var dateInput = new Date();
+    if (dateSplit[0] > dateInput.getFullYear() || dateSplit[0] < 1900 ) {
+        $('.errorDiv').html("Enter valid date");
+        return false;
+    }
+    dateInput.setYear(dateSplit[0]);
+    dateInput.setMonth(dateSplit[1] - 1);
+    dateInput.setDate(dateSplit[2]);
+    console.log("date input " + dateInput);
+
+    // check if date year is valid and not in future
+    var todaysDate = new Date();
+    if (dateInput > todaysDate) {
+        $('.errorDiv').html("Enter valid date");
+        return false;
+
+    };
+
+    var yesterday = new Date(dateInput.getTime());
+    yesterday.setDate(yesterday.getDate() - 1);
+    console.log(yesterday);
+
+    var tomorrow = new Date(dateInput.getTime());
+    tomorrow.setDate(tomorrow.getDate() + 1);
+    console.log(tomorrow);
+
+    dateB = moment(yesterday).format("YYYYMMDD");
+    dateA = moment(tomorrow).format("YYYYMMDD");
+    console.log(dateB);
+    console.log(dateA);
+    return true;
+
+};
+
+
+
 $(document).ready(function () {
     // form submit handler
     $('body').on('click', '#search-btn', function (event) {
-
+        dateA = "";
+        dateB = "";
+        $("#news-results").empty();
         if (formIsValid()) {
 
             event.preventDefault();
-            $("#errorDiv").html("");
+            $(".errorDiv").html("");
             var url = "https://api.nytimes.com/svc/search/v2/articlesearch.json?api-key=53012fe47d7d4df88e3e77c94cc85269";
 
             function nytSearch() {
@@ -31,6 +75,7 @@ $(document).ready(function () {
                 // var searchQ = searchState + "%20" + searchCity;
                 var limitAmt = $("#noToRetrieve").val();
                 var startY = $("#date-input").val();
+                console.log("date entered is = " + startY);
 
                 // var dateFormatted = moment(startY).format("YYYYMMDD");
                 var endY = startY;
@@ -47,25 +92,7 @@ $(document).ready(function () {
 
 
                 // create before and after dates 
-                var dateSplit = startY.split('-');
-                var today = new Date();
-                today.setYear(dateSplit[0]);
-                today.setMonth(dateSplit[1] - 1);
-                today.setDate(dateSplit[2]);
-                console.log(today);
 
-                var yesterday = new Date(today.getTime());
-                yesterday.setDate(yesterday.getDate() - 1);
-                console.log(yesterday);
-
-                var tomorrow = new Date(today.getTime());
-                tomorrow.setDate(tomorrow.getDate() + 1);
-                console.log(tomorrow);
-
-                var dateB = moment(yesterday).format("YYYYMMDD");
-                var dateA = moment(tomorrow).format("YYYYMMDD");
-                console.log(dateB);
-                console.log(dateA);
 
                 if (endY !== "") {
                     url += "&begin_date=" + dateB;
@@ -138,6 +165,8 @@ $(document).ready(function () {
             $("#news-results").empty();
             nytSearch();
 
+        } else {
+            event.preventDefault();
         }
     }); // end onclick
 }); //end doc.ready

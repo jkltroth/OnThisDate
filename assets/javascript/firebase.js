@@ -35,7 +35,9 @@ $('#search-btn').on('click', function (event) {
             city: city,
             dateAdded: firebase.database.ServerValue.TIMESTAMP
         });
-    };
+    } else {
+        event.preventDefault();
+    }
 });
 
 
