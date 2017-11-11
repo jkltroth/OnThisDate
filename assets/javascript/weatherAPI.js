@@ -86,7 +86,6 @@ function displayWeatherInfo() {
 
                 var averageTempCombined = "No Results";
 
-
             } else {
                 // Average Temp in Celcius
                 var averageTempCelcius = results.dailysummary[0].meantempm;
