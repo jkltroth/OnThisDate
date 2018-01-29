@@ -1,2 +1,2 @@
-# Project1JKLP
-Project #1 - James R, Karen J, Louise H, and Paul H
+# On This Date: Weather & News
+A single page web application that allows users to query historical weather and news information.
